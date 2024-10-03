@@ -25,18 +25,32 @@ import Foundation
 struct Astros: Decodable, Hashable {
     let eleVem: String
     let name: String
-//    let description: String
+    let description: String
     let image_url: String
-//    let composition: Composition
-//    let diameterKm: Int
-//    let moons: Int
+    let composition: Composition
+    let diameter_km: Int
+    let moons: Int
+ 
+}
+
+struct Composition: Decodable, Hashable{
+    
+    let elements: [AllElements]
+    let atmosphere: String
+}
+
+struct AllElements: Decodable, Hashable{
+    
+    let element: String
+    let percentage: String
+    
 }
 
 class ViewModel : ObservableObject {
     @Published var chars : [Astros] = []
     
     func fetch(){
-        guard let url = URL(string: "http://10.87.155.78:1880/planetaa" ) else{
+        guard let url = URL(string: "http://127.0.0.1:1880/planetaa" ) else{
             return
         }
         
@@ -61,34 +75,3 @@ class ViewModel : ObservableObject {
 }
 
 
-
-final class ContentViewModel: ObservableObject {
-    
-    // MARK: - Properties
-    
-    @Published private(set) var stateModel: UIStateModel = UIStateModel()
-    @Published private(set) var activeCard: Int = 0
-    private var cancellables: [AnyCancellable] = []
-    
-    // MARK: - Lifecycle
-    
-    init() {
-            self.stateModel.$activeCard.sink { completion in
-                switch completion {
-                case let .failure(error):
-                    print("finished with error: ", error.localizedDescription)
-                case .finished:
-                    print("finished")
-                }
-            } receiveValue: { [weak self] activeCard in
-                self?.someCoolMethodHere(for: activeCard)
-            }.store(in: &cancellables)
-        }
-    
-    // MARK: - Helpers
-    
-    private func someCoolMethodHere(for activeCard: Int) {
-        print("someCoolMethodHere: index received: ", activeCard)
-        self.activeCard = activeCard
-    }
-}

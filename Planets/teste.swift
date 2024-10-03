@@ -33,10 +33,10 @@ struct teste: View {
                                 .frame(width: 250, height: 250)
                                 
                                 Text(index.name)
-                                
-                            }.onAppear(){
-                                aux = index
                             }
+//                            }.onAppear(){
+//                                aux = index
+//                            }
                         }
                         .shadow(radius: 20)
                         HStack{
