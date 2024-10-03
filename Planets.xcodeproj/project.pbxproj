@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1750D0CA2CAEBF0600FD2810 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1750D0C92CAEBF0600FD2810 /* FirstView.swift */; };
+		1750D0D22CAF1F4100FD2810 /* Abel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1750D0D12CAF1F4100FD2810 /* Abel-Regular.ttf */; };
+		1750D0D42CAF206F00FD2810 /* TabVieww.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1750D0D32CAF206F00FD2810 /* TabVieww.swift */; };
 		17BF0BB52C9DE4F700961424 /* PlanetsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BF0BB42C9DE4F700961424 /* PlanetsApp.swift */; };
 		17BF0BB72C9DE4F700961424 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BF0BB62C9DE4F700961424 /* ContentView.swift */; };
 		17BF0BB92C9DE4F900961424 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17BF0BB82C9DE4F900961424 /* Assets.xcassets */; };
@@ -19,6 +21,9 @@
 
 /* Begin PBXFileReference section */
 		1750D0C92CAEBF0600FD2810 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
+		1750D0CE2CAF195800FD2810 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1750D0D12CAF1F4100FD2810 /* Abel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Abel-Regular.ttf"; path = "../../../Downloads/Abel/Abel-Regular.ttf"; sourceTree = "<group>"; };
+		1750D0D32CAF206F00FD2810 /* TabVieww.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabVieww.swift; sourceTree = "<group>"; };
 		17BF0BB12C9DE4F700961424 /* Planets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BF0BB42C9DE4F700961424 /* PlanetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsApp.swift; sourceTree = "<group>"; };
 		17BF0BB62C9DE4F700961424 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,12 +64,15 @@
 		17BF0BB32C9DE4F700961424 /* Planets */ = {
 			isa = PBXGroup;
 			children = (
+				1750D0CE2CAF195800FD2810 /* Info.plist */,
 				17BF0BB42C9DE4F700961424 /* PlanetsApp.swift */,
+				1750D0D32CAF206F00FD2810 /* TabVieww.swift */,
 				1750D0C92CAEBF0600FD2810 /* FirstView.swift */,
 				17BF0BB62C9DE4F700961424 /* ContentView.swift */,
 				17BF0BC82C9DFDED00961424 /* Detalhes.swift */,
 				17BF0BCA2C9E264000961424 /* teste.swift */,
 				17BF0BC22C9DE50800961424 /* VM.swift */,
+				1750D0D12CAF1F4100FD2810 /* Abel-Regular.ttf */,
 				17BF0BB82C9DE4F900961424 /* Assets.xcassets */,
 				17BF0BBA2C9DE4F900961424 /* Preview Content */,
 			);
@@ -137,6 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1750D0D22CAF1F4100FD2810 /* Abel-Regular.ttf in Resources */,
 				17BF0BBC2C9DE4F900961424 /* Preview Assets.xcassets in Resources */,
 				17BF0BB92C9DE4F900961424 /* Assets.xcassets in Resources */,
 			);
@@ -153,6 +162,7 @@
 				1750D0CA2CAEBF0600FD2810 /* FirstView.swift in Sources */,
 				17BF0BC92C9DFDED00961424 /* Detalhes.swift in Sources */,
 				17BF0BB52C9DE4F700961424 /* PlanetsApp.swift in Sources */,
+				1750D0D42CAF206F00FD2810 /* TabVieww.swift in Sources */,
 				17BF0BC32C9DE50800961424 /* VM.swift in Sources */,
 				17BF0BCB2C9E264000961424 /* teste.swift in Sources */,
 			);
@@ -290,6 +300,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Planets/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Planets/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -318,6 +329,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Planets/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Planets/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
