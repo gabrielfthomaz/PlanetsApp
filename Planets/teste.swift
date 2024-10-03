@@ -1,70 +1,101 @@
+
 import SwiftUI
-import Combine
 
-
-// View do Carrossel Circular
 struct teste: View {
-  //  let images: [ImageModel]
-    @State private var currentIndex: Int = 0
-
-    @StateObject var vm = ViewModel()
+  
+    let timer = Timer.publish(every: 3.0, on: .main, in: .common).autoconnect()
     
+   
+    @State private var selectedImageIndex: Int = 0
+    @StateObject var vm = ViewModel()
+    @State  var aux: Astros?
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                ForEach(vm.chars, id: \.self) { index in
-                    AsyncImage(url: URL(string: index.image_url)) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                                .rotationEffect(.degrees(Double(index) * (360 / Double(vm.chars.count))) - Double(currentIndex) * (360 / Double(vm.chars.count)))
-                                .offset(y: -geometry.size.width / 2 + 50)
-                        case .failure:
-                            Image(systemName: "exclamationmark.triangle")
+        ZStack {
+            
+            Color.secondary
+                .ignoresSafeArea()
+
+           
+            TabView(selection: $selectedImageIndex) {
+                
+                ForEach(vm.chars.sorted(by: { $0.eleVem < $1.eleVem }), id: \.self) { index in
+                    VStack{
+                        VStack{
+                            ZStack(alignment: .topLeading) {
+                                
+                                AsyncImage(url: URL(string: index.image_url)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                } placeholder: {
+                                    Color.gray
+                                }
+                                .frame(width: 250, height: 250)
+                                
+                                Text(index.name)
+                                
+                            }.onAppear(){
+                                aux = index
+                            }
                         }
+                        .shadow(radius: 20)
+                        HStack{
+                            Capsule()
+                                .fill(Color.white.opacity(selectedImageIndex == Int(index.eleVem) ?? -1 ? 1 : 0.33))
+                                .frame(width: 35, height: 8)
+                                .onTapGesture {
+                                    if let indexAsInt = Int(index.eleVem) {
+                                        selectedImageIndex = indexAsInt
+                                    } else {
+                                        // Lida com o caso em que a conversão falha (opcional)
+                                        print("Erro ao converter eleVem para Int")
+                                    }
+                                }
+                        }            .offset(y: 130)
                     }
                 }
             }
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .onAppear {
-                startCarousel()
+            .frame(height: 300)
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .ignoresSafeArea()
+
+           
+//            HStack {
+//                ForEach(vm.chars, id: \.self) { index2 in
+//                    Capsule()
+//                        .fill(Color.white.opacity(selectedImageIndex == Int(aux!.eleVem) ?? -1 ? 1 : 0.33))
+//                        .frame(width: 35, height: 8)
+//                        .onTapGesture {
+//                            if let indexAsInt = Int(aux!.eleVem) {
+//                                selectedImageIndex = indexAsInt
+//                            } else {
+//                                // Lida com o caso em que a conversão falha (opcional)
+//                                print("Erro ao converter eleVem para Int")
+//                            }
+//                        }
+//                }
+//                .offset(y: 130)
+//
+//            }
+        }
+        .onReceive(timer) { _ in
+            withAnimation(.default) {
+                if let eleVemInt = Int(aux?.eleVem ?? "0") { // Converte a String para Int
+                    selectedImageIndex = (eleVemInt + 1) % (aux?.image_url.count ?? 1)
+                } else {
+                    print("eleVem não é um número válido")
+                }
             }
         }
-    }
 
-    private func startCarousel() {
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { _ in
-            withAnimation {
-                currentIndex = (currentIndex + 1) % vm.chars.count
-            }
+
+        .onAppear(){
+            vm.fetch()
         }
     }
 }
 
-// View principal
-//struct teste: View {
-//    @StateObject var viewModel = ImageViewModel()
-//
-//    var body: some View {
-//        VStack {
-//            if viewModel.images.isEmpty {
-//                ProgressView("Carregando...")
-//            } else {
-//                CircularCarouselView(images: viewModel.images)
-//                    .frame(width: 300, height: 300)
-//            }
-//        }
-//        .onAppear {
-//            viewModel.fetchImages()
-//        }
-//    }
-//}
-
-#Preview{
+#Preview {
     teste()
 }
+
