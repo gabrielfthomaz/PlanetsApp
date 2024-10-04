@@ -55,16 +55,18 @@ struct ContentView: View {
                                              .opacity(0.2)
                                              .cornerRadius(3.0)
                                      }
+                                     ZStack{
+                                         Rectangle()
+                                             .frame(width: .infinity, height: 50)
+                                             .background(.white)
+                                             .opacity(0.2)
+                                             .cornerRadius(3.0)
+                                             
                                          Text(index.name)
                                              .foregroundStyle(.white)
-                                             .font(.system(size: 30))
+                                             .font(.system(size: 35))
                                              .bold()
-                                         
-                                         //                            }.onAppear(){
-                                         //                                aux = index
-                                         //                            }
-                                         
-                                   
+                                     }
                                  }
                                  VStack{
                                      
@@ -154,6 +156,8 @@ struct ContentView: View {
                                                 .font(.system(size: 20))
                                                // .bold()
                                                 .padding()
+                                                .frame(width: 350, height: .infinity)
+                                               // .multilineTextAlignment(.trailing)
                                         }
                                      )
                                  }

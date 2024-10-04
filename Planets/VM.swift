@@ -75,3 +75,23 @@ class ViewModel : ObservableObject {
 }
 
 
+
+enum APIKey {
+    
+    static var `default` : String {
+        guard let filePath = Bundle.main.path(forResource: "Info", ofType: "plist")
+        else {
+            fatalError("Arquivo não encontrado")
+        }
+        let plist = NSDictionary(contentsOfFile: filePath)
+        guard let value = plist?.object(forKey: "API_KEY") as? String else {
+            fatalError("API key não encontrada no arquivo")
+        }
+        if value.starts(with: "_"){
+            fatalError("Necessita-se de uma API key")
+            
+        }
+        return value
+    }
+    
+}
