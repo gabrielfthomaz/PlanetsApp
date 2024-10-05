@@ -20,8 +20,48 @@ struct Tudo {
 }
 
 struct AstroAI: View {
-    
+    @State private var showingSheet = false
+
     @State var recebe : Tudo = Tudo(localX: "", perto: "", direcao: "", cor: "", movimento: "", dataX: "", hora: "")
+    
+
+    
+    
+    @State var recebeAI : Tudo = Tudo(localX: "", perto: "", direcao: "", cor: "", movimento: "", dataX: "", hora: "")
+    
+    let model = GenerativeModel(name: "gemini-pro", apiKey: APIKey.default)
+    
+    @State var frase: String = ""
+    @State var fraseRecebida: String = ""
+    
+    @State var aiResponse: String = "X"
+    
+    
+     func sendMessage() {
+         
+         aiResponse = ""
+         
+         Task {
+             do {
+                 let response = try await model.generateContent(frase)
+                 
+                 guard let text = response.text else  {
+                     frase = "Não entendi.\n Tente novamente!."
+                     return
+                 }
+                 
+                 frase = fraseRecebida
+                 aiResponse = text
+                 
+             } catch {
+                 aiResponse = "Algo deu errado: \n \(error.localizedDescription)"
+             }
+         }
+     }
+     
+    
+    
+    
     
     var body: some View {
         NavigationStack{
@@ -192,8 +232,11 @@ struct AstroAI: View {
                             
                         }.padding(20)
                         
-                        NavigationLink{
-                            RespostaView(recebeAI: recebe)
+                        Button{
+                            showingSheet.toggle()
+                            fraseRecebida = "Gostaria de ajuda somente para identificar um corpo celeste no céu de onde estou, as infomações que tenho são: \n Estou em \(recebeAI.localX) \n O corpo celeste que estou buscando e está a \(recebeAI.direcao) de \(recebeAI.perto) \n Tem a coloração \(recebeAI.cor) \n \(recebeAI.movimento) está se movendo em relação a outros corpos \n No horário \(recebeAI.hora) \n Na data \(recebeAI.dataX) \n Me diga qual corpo celeste pode ser e algumas referencias de outros corpos em volta para me ajudar! Responda de forma sucinta e direta. Somente com DUAS FRASES."
+                            
+                            sendMessage()
                         } label: {
                             ZStack{
                                 
@@ -208,14 +251,9 @@ struct AstroAI: View {
                                     Image(systemName: "moon.stars.circle")
                                 }.foregroundColor(.white)
                             }.foregroundColor(.gray)
+                       }       .sheet(isPresented: $showingSheet) {
+                           Text(aiResponse)
                        }
-                                .onTapGesture {
-
-                          
-                            
-                      
-                        }
-                        //Text(aiResponse)
                     }
                 }
             }
