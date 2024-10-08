@@ -15,7 +15,8 @@ struct FirstView: View {
                 
                 VStack{
                     
-                    
+                    VStack{
+                        
                     VStack{
                         Text("ASTRO AI")
                             .font(.custom("Abel-Regular", size: 60))
@@ -34,58 +35,101 @@ struct FirstView: View {
                                     .position(CGPoint(x: 120, y: 52))
                             )
                     }.frame(width: 400, height: .infinity)
- 
-                    NavigationLink(destination: AstroAI()){
+                    
                         VStack{
-                            Spacer()
-                        ZStack{
-                                Spacer()
-                                Rectangle()
-                                    .frame(width: .infinity, height: .infinity)
-                                    .background(.white)
-                                    .opacity(0.2)
-                                    .cornerRadius(3.0)
-                                
-                                Text("Encontre um objeto no céu")
-                                    .font(.custom("Abel-Regular", size: 20))
-                                    .foregroundStyle(.white)
-                                    .bold()
-                                    .multilineTextAlignment(.center)
-                            }.frame(width: 280, height: 60)
                             
+                            NavigationLink(destination: AstroAI()){
+                                VStack{
+                                    
+                                    Spacer()
+                                    ZStack{
+                                        Spacer()
+                                        Rectangle()
+                                            .frame(width: .infinity, height: .infinity)
+                                            .foregroundColor(.white)
+                                            .opacity(0.8)
+                                            .cornerRadius(8)
+                                            .position(CGPoint(x: 136, y: 34))
+                                            .overlay(
+                                                Rectangle()
+                                                    .frame(width: .infinity, height: .infinity)
+                                                    .foregroundColor(.gray)
+                                                // .opacity(0.8)
+                                                    .cornerRadius(8)
+                                            )
+                                        Text("Encontre um objeto no céu")
+                                            .font(.custom("Abel-Regular", size: 20))
+                                            .foregroundStyle(.white)
+                                            .bold()
+                                            .multilineTextAlignment(.center)
+                                    }.frame(width: 280, height: 60)
+                                        .padding()
+                                    
+                                }//.frame(width: 0, height: 300)
+                            }
+                            NavigationLink(destination: DicasView()){
+                                ZStack{
+                                    Spacer()
+                                    Rectangle()
+                                        .frame(width: .infinity, height: .infinity)
+                                        .foregroundColor(.white)
+                                        .opacity(0.8)
+                                        .cornerRadius(8)
+                                        .position(CGPoint(x: 136, y: 34))
+                                        .overlay(
+                                            Rectangle()
+                                                .frame(width: .infinity, height: .infinity)
+                                                .foregroundColor(.gray)
+                                            // .opacity(0.8)
+                                                .cornerRadius(8)
+                                        )
+                                    HStack{
+                                        Text("Dicas")
+                                            .font(.custom("Abel-Regular", size: 20))
+                                            .foregroundStyle(.white)
+                                            .bold()
+                                            .multilineTextAlignment(.center)
+                                        
+                                        Image(systemName: "sparkle.magnifyingglass")
+                                            .foregroundColor(.white)
+                                    }
+                                }.frame(width: 280, height: 60)
+                            }
                         }
                     }
-                    HStack{
-                        Text("Conheça mais sobre o Sistema Solar")
-                            .font(.custom("Abel-Regular", size: 20))
-                            .foregroundStyle(.white)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                        
-                        // .padding()
-                        Image(systemName: "greaterthan")
-                            .foregroundStyle(.white)
-                            .font(.system(size: 30))
-                            .bold()
-                            .opacity(0.6)
-                            .cornerRadius(3.0)
-                    }.offset(CGSize(width: 0, height: 150))
-                    
                     Spacer()
-                    AsyncImage(url: URL(string: "https://www.imagensempng.com.br/wp-content/uploads/2022/02/34324.png")) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        ProgressView()
+                    ZStack{
+                        AsyncImage(url: URL(string: "https://www.imagensempng.com.br/wp-content/uploads/2022/02/34324.png")) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(width: 600, height: 600)
+                        .shadow(radius: 20)
+                        .offset(CGSize(width: 0, height: 200))
+                        VStack(){
+                            //Spacer()
+                            Rectangle()
+                                .foregroundColor(.white)
+                                .opacity(0.8)
+                                .frame(width: 350, height: 70)
+                                .cornerRadius(40).overlay(
+                                    
+                                    Rectangle()
+                                        .foregroundColor(.gray)
+                                        .opacity(0.8)
+                                        .frame(width: 340, height: 60)
+                                        .cornerRadius(34)
+                                    
+                                    
+                                )
+                        }.offset(CGSize(width: 0, height: 180))
                     }
-                    .frame(width: 600, height: 600)
-                    .shadow(radius: 20)
-                    .offset(CGSize(width: 0, height: 200))
-                    //.rotationEffect(.degrees(270))
                 }
             }
-        }
+        }.tint(.white)
     }
 }
 struct Fundo: View  {
@@ -96,13 +140,14 @@ struct Fundo: View  {
             .scaledToFill()
             .frame(width: 1000, height: 1000)
             .opacity(0.97)
-            .edgesIgnoringSafeArea(.all)
             .rotationEffect(.degrees(rotation))
             .onAppear {
                 withAnimation(Animation.linear(duration: 20).repeatForever(autoreverses: false)) {
                     rotation = 20
                 }
             }
+        
+        
     }
 }
 #Preview {

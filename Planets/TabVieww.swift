@@ -9,36 +9,27 @@ import SwiftUI
 
 struct TabVieww: View {
     
+
     var body: some View {
-        
-        TabView {
-            FirstView()
-                .tabItem {
-                    Label("Menu", systemImage: "house")
-                }
-            
-            ContentView()
-                .tabItem {
-                    Label("Order", systemImage: "ellipsis.circle.fill")
-                }
-            
-        }   .tabViewStyle(.page)
-            .ignoresSafeArea()
-          //  .tint(.black)
-        //            .onAppear(perform: {
-        //                //2
-        //                UITabBar.appearance().unselectedItemTintColor = .systemGray
-        //                //3
-        //                UITabBarItem.appearance().badgeColor = .systemPink
-        //                //4
-        //                UITabBar.appearance().backgroundColor = .systemGray4.withAlphaComponent(0.9)
-        //                //5
-        //                UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.systemPink]
-        //                //UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance()
-        //                //Above API will kind of override other behaviour and bring the default UI for TabView
-        //            })
-    }
-}
+        NavigationStack{
+            TabView {
+                FirstView()
+                    .tabItem {
+                            Label("Home", systemImage: "house.circle.fill")
+                    }
+                
+                ContentView()
+                    .tabItem {
+                        Label("Sistema Solar", systemImage: "sun.max.circle.fill")
+                    }
+                
+            } //  .tabViewStyle(.page)
+                .ignoresSafeArea()
+                .accentColor(.white)
+               }
+
+             }
+        }
 
 #Preview {
     TabVieww()

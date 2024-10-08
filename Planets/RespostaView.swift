@@ -10,9 +10,14 @@ import GoogleGenerativeAI
 
 struct RespostaView: View {
     
+    @State private var isFavorite = false
+    let timerBrain = Timer.publish(every: 2.0, on: .main, in: .common).autoconnect()
+    
     @State var recebeAI : Tudo = Tudo(localX: "", perto: "", direcao: "", cor: "", movimento: "", dataX: "", hora: "")
     
     let model = GenerativeModel(name: "gemini-pro", apiKey: APIKey.default)
+    
+    
     
     @State var frase: String = ""
     @State var fraseRecebida: String = ""
@@ -20,57 +25,97 @@ struct RespostaView: View {
     @State var aiResponse: String = "X"
     
     
-     func sendMessage() {
-         
-         aiResponse = ""
-         
-         Task {
-             do {
-                 let response = try await model.generateContent(frase)
-                 
-                 guard let text = response.text else  {
-                     frase = "Não entendi.\n Tente novamente!."
-                     return
-                 }
-                 
-                 frase = fraseRecebida
-                 aiResponse = text
-                 
-             } catch {
-                 aiResponse = "Algo deu errado: \n \(error.localizedDescription)"
-             }
-         }
-     }
-     
+    func sendMessage() {
+        
+        aiResponse = ""
+        
+        Task {
+            do {
+                let response = try await model.generateContent(frase)
+                
+                guard let text = response.text else  {
+                    frase = "Não entendi.\n Tente novamente!."
+                    return
+                }
+                
+                frase = fraseRecebida
+                aiResponse = text
+                
+            } catch {
+                aiResponse = "Algo deu errado: \n \(error.localizedDescription)"
+            }
+        }
+    }
+    
     
     var body: some View {
-        NavigationStack{
+        
+        VStack{
             ZStack{
                 Image("backgroundPlanets")
                     .resizable()
                     .ignoresSafeArea()
                 VStack{
-                    ZStack{
-                        Rectangle()
-                            .frame(width: 350, height: 700)
-                            .background(.white)
-                            .opacity(0.2)
-                            .cornerRadius(8.0)
-                        Text(aiResponse)
-                            .foregroundStyle(.white)
-                            .font(.system(size: 18))
-                            .frame(width: 350, height: 700)
+                    //                    VStack{
+                    //                      Robot()
+                    //
+                    //                    }
+         
+                   // Spacer()
+                    VStack{
+                        
+                        Image(systemName: "brain.fill")
+                            .font(.system(size: 50))
+                            .foregroundColor(.gray)
+                            .symbolEffect(.bounce.down, value: isFavorite)
+                            .font(.largeTitle)
+                            .onReceive(timerBrain) { _ in
+                                isFavorite.toggle()
+                            }
+                            .padding()
+                        
+                        ZStack{
+                            Rectangle()
+                                .frame(width: 350, height: 500)
+                                .foregroundColor(.white)
+                                .opacity(0.8)
+                                .cornerRadius(6.0)
+                                .offset(x: -4, y: 4)
+                            Rectangle()
+                                .frame(width: 350, height: 500)
+                                .foregroundColor(.gray)
+                                .opacity(0.7)
+                                .cornerRadius(6.0)
+                                .overlay(
+                                    VStack{
+                                        Text(aiResponse)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                    }
+                                )
+                            
+                        }
+                        
                     }
                     
+                    Spacer()
+                    HStack{
+                        Spacer()
+                        Text("by GEMINI")
+                            .padding()
+                            .foregroundColor(.white)
+                            .font(.system(size: 20))
+                            .bold()
+                        Spacer()
+                        
+                    }
                 }
             }
-        }.onAppear(){
             
-            fraseRecebida = "Gostaria de ajuda somente para identificar um corpo celeste no céu de onde estou, as infomações que tenho são: \n Estou em \(recebeAI.localX) \n O corpo celeste que estou buscando e está a \(recebeAI.direcao) de \(recebeAI.perto) \n Tem a coloração \(recebeAI.cor) \n \(recebeAI.movimento) está se movendo em relação a outros corpos \n No horário \(recebeAI.hora) \n Na data \(recebeAI.dataX) \n Me diga qual corpo celeste pode ser e algumas referencias de outros corpos em volta para me ajudar! Responda de forma sucinta e direta. Somente com DUAS FRASES."
             
-            sendMessage()
         }
     }
+    
 }
 
 #Preview {

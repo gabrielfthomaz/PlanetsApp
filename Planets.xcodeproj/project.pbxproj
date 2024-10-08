@@ -13,6 +13,7 @@
 		1750D0D72CB069E300FD2810 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 1750D0D62CB069E300FD2810 /* GoogleGenerativeAI */; };
 		1750D0D92CB08B0500FD2810 /* AstroAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1750D0D82CB08B0500FD2810 /* AstroAI.swift */; };
 		1750D0DB2CB0A9F800FD2810 /* RespostaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1750D0DA2CB0A9F800FD2810 /* RespostaView.swift */; };
+		1750D0DD2CB5B6BC00FD2810 /* DicasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1750D0DC2CB5B6BC00FD2810 /* DicasView.swift */; };
 		17BF0BB52C9DE4F700961424 /* PlanetsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BF0BB42C9DE4F700961424 /* PlanetsApp.swift */; };
 		17BF0BB72C9DE4F700961424 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BF0BB62C9DE4F700961424 /* ContentView.swift */; };
 		17BF0BB92C9DE4F900961424 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17BF0BB82C9DE4F900961424 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		1750D0D32CAF206F00FD2810 /* TabVieww.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabVieww.swift; sourceTree = "<group>"; };
 		1750D0D82CB08B0500FD2810 /* AstroAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstroAI.swift; sourceTree = "<group>"; };
 		1750D0DA2CB0A9F800FD2810 /* RespostaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespostaView.swift; sourceTree = "<group>"; };
+		1750D0DC2CB5B6BC00FD2810 /* DicasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicasView.swift; sourceTree = "<group>"; };
 		17BF0BB12C9DE4F700961424 /* Planets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BF0BB42C9DE4F700961424 /* PlanetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsApp.swift; sourceTree = "<group>"; };
 		17BF0BB62C9DE4F700961424 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				1750D0D82CB08B0500FD2810 /* AstroAI.swift */,
 				1750D0DA2CB0A9F800FD2810 /* RespostaView.swift */,
 				1750D0C92CAEBF0600FD2810 /* FirstView.swift */,
+				1750D0DC2CB5B6BC00FD2810 /* DicasView.swift */,
 				17BF0BB62C9DE4F700961424 /* ContentView.swift */,
 				17BF0BC82C9DFDED00961424 /* Detalhes.swift */,
 				17BF0BCA2C9E264000961424 /* teste.swift */,
@@ -173,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17BF0BB72C9DE4F700961424 /* ContentView.swift in Sources */,
+				1750D0DD2CB5B6BC00FD2810 /* DicasView.swift in Sources */,
 				1750D0CA2CAEBF0600FD2810 /* FirstView.swift in Sources */,
 				17BF0BC92C9DFDED00961424 /* Detalhes.swift in Sources */,
 				1750D0D92CB08B0500FD2810 /* AstroAI.swift in Sources */,
