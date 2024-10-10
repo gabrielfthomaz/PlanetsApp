@@ -59,7 +59,7 @@ struct DicasView: View {
                                         
                                         
                                     )
-                                Image("cruzeirodos")
+                                Image("tresmarias")
                                     .resizable()
                                     .frame(width: 300, height: 200)
                             }
